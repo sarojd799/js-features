@@ -59,3 +59,70 @@ Object.defineProperty(obj, 'ohai', {
 
 ===============================================================================================414
 2.Object.freeze()
+
+i.Freezing an object prevents extensions
+2.makes existing properties non-writable
+3.makes object non-configurable
+
+const o = Object.freeze(obj);
+
+Object.isFrozen(obj); //true
+
+o === obj; //true
+
+3.Object.prototype.constructor:-
+
+The constructor property returns a reference to the Object constructor function that created the instance object. 
+Note that the value of this property is a reference to the function itself, not a string containing the function's name.
+
+Any object (with the exception of objects created with Object.create(null))
+
+const arr = [];
+arr.constructor = String
+arr.constructor === String // true
+arr instanceof String // false
+arr instanceof Array // true
+
+const arr = [];
+Object.hasOwn(arr, "constructor") // false
+Object.hasOwn(Object.getPrototypeOf(arr), "constructor") // true
+
+let o = {}
+o.constructor === Object // true
+
+let o = new Object
+o.constructor === Object // true
+
+let a = []
+a.constructor === Array // true
+
+let a = new Array
+a.constructor === Array // true
+
+let n = new Number(3)
+n.constructor === Number // true
+
+
+Inheritance:
+
+function Parent(firstName, lastName) {
+   this.firstName = firstName || 'fName';
+   this.lastName = lastName || 'lName';
+}
+
+Parent.prototype.getFullName = function() {
+     return this.firstName+ ' '+this.lastName
+}
+
+
+function Child(firstName, lastName,age) {
+   Parent.call(this, firstName,lastName)
+}
+
+Child.prototype = Object.create(Parent.prototype);
+
+console.dir(Parent.prototype.constructor === Parent);
+console.dir(Parent);
+console.dir(Parent.prototype);
+console.dir(Child);
+console.log(new Child('alex','Mercer',24).getFullName());

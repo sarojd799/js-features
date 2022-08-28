@@ -1,0 +1,129 @@
+Symbol is a built-in object whose constructor returns a symbol primitive — also called a Symbol value or just a Symbol — that's guaranteed to be unique
+
+Symbols are often used to add unique property keys to an object that won't collide with keys any other code might add to the object
+
+> Every Symbol() call is guaranteed to return a unique Symbol
+> Every Symbol.for("key") call will always return the same Symbol for a given value of "key"
+> When Symbol.for("key") is called, if a Symbol with the given key can be found in the global Symbol registry, 
+that Symbol is returned. Otherwise, a new Symbol is created,
+
+Symbol('foo') === Symbol('foo')  // false
+
+const sym = new Symbol();  // TypeError
+
+> use the methods Symbol.for() and Symbol.keyFor() to set and retrieve Symbols from the global Symbol registry.
+
+Symbol.keyFor(Symbol.for("tokenString")) === "tokenString" // true
+
+> All static properties of the Symbol constructor are Symbols themselves, whose values are constant across realms. 
+They are known as well-known Symbols, and their purpose is to serve as "protocols" for certain built-in JavaScript operations, 
+allowing users to customize the language's behavior.
+
+> The method Object.getOwnPropertySymbols() returns an array of Symbols and lets you find Symbol properties on a given object
+
+Symbol(): constructor
+
+Static properties:-
+
+1.Symbol.asyncIterator:A method that returns the default AsyncIterator for an object. Used by for await...of.
+
+2.Symbol.hasInstance
+
+3.Symbol.isConcatSpreadable:A Boolean value indicating if an object should be flattened to its array elements. Used by Array.prototype.concat().
+-----------------------------------------------------------------------------------------------------------------------------------------------
+const alpha = ['a', 'b', 'c'];
+const numeric = [1, 2, 3];
+let alphaNumeric = alpha.concat(numeric);
+
+console.log(alphaNumeric);
+// expected output: Array ["a", "b", "c", 1, 2, 3]
+
+numeric[Symbol.isConcatSpreadable] = false;
+alphaNumeric = alpha.concat(numeric);
+
+console.log(alphaNumeric);
+// expected output: Array ["a", "b", "c", Array [1, 2, 3]]
+
+4.Symbol.iterator:A method returning the default iterator for an object. Used by for...of.
+----------------------------------------------------------------------------------------
+const iterable1 = {};
+
+iterable1[Symbol.iterator] = function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+console.log([...iterable1]);
+// expected output: Array [1, 2, 3]
+
+5.Symbol.toPrimitive: specifies a function valued property that is called to convert an object to a corresponding primitive value.
+------------------------------------------------------------------------------------------------------------------------------
+
+// An object without Symbol.toPrimitive property.
+const obj1 = {};
+console.log(+obj1);     // NaN
+console.log(`${obj1}`); // "[object Object]"
+console.log(obj1 + ''); // "[object Object]"
+
+// An object with Symbol.toPrimitive property.
+const obj2 = {
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'number') {
+      return 10;
+    }
+    if (hint === 'string') {
+      return 'hello';
+    }
+    return true;
+  }
+};
+console.log(+obj2);     // 10        — hint is "number"
+console.log(`${obj2}`); // "hello"   — hint is "string"
+console.log(obj2 + ''); // "true"    — hint is "default"
+
+6.Symbol.unscopables:well-known symbol is used to specify an object value of whose own and inherited property names 
+are excluded from the with environment bindings of the associated object.
+--------------------------------------------------------------------------------------------------------------------
+const object1 = {
+  property1: 42
+};
+
+object1[Symbol.unscopables] = {
+  property1: true
+};
+
+with (object1) {
+  console.log(property1);
+  // expected output: Error: property1 is not defined
+}
+
+
+7.Symbol.prototype.description
+-----------------------------
+Symbol('desc').toString();   // "Symbol(desc)"
+Symbol('desc').description;  // "desc"
+Symbol('').description;      // ""
+Symbol().description;        // undefined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
