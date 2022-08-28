@@ -1,0 +1,61 @@
+
+
+
+A data descriptor is a property that has a value, which may or may not be writable. 
+An accessor descriptor is a property described by a getter-setter pair of functions
+
+You can't define both at the same time
+
+const o = {};
+
+Object.defineProperty(o, 'a', {
+  value: 37,
+  writable: true,
+  enumerable: true,
+  configurable: true,
+  get() { return 33; },
+});//Invalid property descriptor. Cannot both specify accessors and a value or writable attribute, 
+
+
+1. Object.seal() seals an object
+
+Sealing an object 
+    1.prevents extensions
+    2.makes existing properties non-configurable
+
+configurable:-
+-------------
+when this is set to false,
+
+the type of this property cannot be changed between data property and accessor property, 
+and the property may not be deleted, 
+and other attributes of its descriptor cannot be changed (however, if it's a data descriptor 
+with writable: true, the value can be changed, and writable can be changed to false).
+
+const object1 = {greet:"hi", count: 0};
+
+console.log(Object.getOwnPropertyDescriptor(object1,'greet'))
+
+const obj = Object.seal(object1)
+
+console.log(Object.getOwnPropertyDescriptor(object1,'greet'))
+
+console.log(Object.isSealed(obj)); //true
+
+console.log(Object.isSealed(object1)); //true
+
+object1.test = true; //not added to object1
+
+obj.test = true; //prop not added to obj
+
+console.log(object1,obj)
+
+console.log(object1 === obj) //true
+
+Object.defineProperty(obj, 'ohai', {
+  value: 17
+}); // TypeError: Cannot define property ohai, object is not extensible
+
+
+===============================================================================================414
+2.Object.freeze()

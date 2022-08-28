@@ -1,0 +1,9 @@
+
+2.3	5th Edition – ECMAScript 2009
+2.4	6th Edition – ECMAScript 2015
+2.5	7th Edition – ECMAScript 2016
+2.6	8th Edition – ECMAScript 2017
+2.7	9th Edition – ECMAScript 2018
+2.8	10th Edition – ECMAScript 2019
+2.9	11th Edition – ECMAScript 2020
+2.10 12th Edition – ECMAScript 2021

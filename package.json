@@ -1,0 +1,24 @@
+{
+  "name": "js-features",
+  "version": "1.0.0",
+  "description": "This project will contain all the new and experimental JS  features examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarojd799/js-features.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarojd799/js-features/issues"
+  },
+  "homepage": "https://github.com/sarojd799/js-features#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10"
+  }
+}

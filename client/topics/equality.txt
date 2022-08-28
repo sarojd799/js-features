@@ -1,0 +1,21 @@
+
+1.We can check equality using Object.is function
+
+Syntax: Object.is(value1, value2);
+
+example:
+-------
+1/0 -> infinity
+1/undefined -> NaN
+1/null -> infinity
+1/'' -> infinity
+
+Object.is -> Determines whether two values are the same value.
+
+Object.is(1/undefined, NaN) -> true
+
+Object.is(1/null, infinity) -> true
+
+Object.is([], []);  -> false
+
+[1,2] == '1,2'-> true

@@ -1,0 +1,13 @@
+
+1.Every object in javascript inherits properties from some object using prototype.
+2.Prototype chain ends when the object has prototype as null
+
+*)To access prototype in practice
+1.all browsers use __proto__
+2.The standard way is Object.getPrototypeOf()
+
+*.When you try to access a property the property is search throughout prototype chain.If still not found then returns undefined.
+
+#Shadowing properties
+---------------------
+When we override any existing property in an Object
